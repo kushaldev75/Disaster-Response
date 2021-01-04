@@ -2,7 +2,7 @@
 
 ## Build Pipelines to Classify Messages with Figure Eight
 
-This project builds a data pipeline to prepare message data from major natural disasters around the world. I build an ETL and RandomForest pipeline to categorize emergency messages based on the needs communicated by the sender.
+This project is a part of my Udacitiy Nanodegree which Aims to builds a data pipeline to prepare message data from major natural disasters around the world. I build an ETL and RandomForest pipeline to categorize emergency messages based on the needs communicated by the sender.
 
 ## Main Steps
 
@@ -34,3 +34,18 @@ Step 1: Type in the command line: python run.py
 Step 2: Open another Terminal Window, Type: env|grep WORK
 
 Step 3: In a new web browser window, type in the following: https://SPACEID-3001.SPACEDOMAIN where SPACEID & SPACEDOMAIN are shown in step 2.
+
+## Environment and Libraries Used
+
+Environment - Jupyer Notebook and Python IDE (Atom)
+
+1. NumPy
+2. Pandas
+3. Scikit-Learn
+4. Plotly
+5. SQLAlchemy
+5. Flask
+
+## Acknowledgement
+
+I would like to Thank Udacity for providing with this Interesting Project and Future Eight or providing the Data and Assistance.
