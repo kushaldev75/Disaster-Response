@@ -75,13 +75,13 @@ def compute_word_counts(messages, load=True, filepath='../data/counts.npz'):
         return list(top_words), list(top_counts)
 
 # load data
-#engine = create_engine('sqlite:///../data/DisasterResponse.db')
-engine = create_engine('sqlite:///C:/Users/Osama/Desktop/OneDrive/Online Education/Data_Scientist_Nanodegree/Project - 5 Disaster_Response/data/DisasterResponse.db')
+engine = create_engine('sqlite:///../data/Disaster.db')
+#engine = create_engine('sqlite:///C:/Users/Osama/Desktop/OneDrive/Online Education/Data_Scientist_Nanodegree/Project - 5 Disaster_Response/data/DisasterResponse.db')
 df = pd.read_sql_table('df', engine)
 
 # load model
-#model = joblib.load("../models/classifier.pkl")
-model = joblib.load("C:/Users/Osama/Desktop/OneDrive/Online Education/Data_Scientist_Nanodegree/Project - 5 Disaster_Response/models/classifier.pkl")
+model = joblib.load("../models/classifier.pkl")
+#model = joblib.load("C:/Users/Osama/Desktop/OneDrive/Online Education/Data_Scientist_Nanodegree/Project - 5 Disaster_Response/models/classifier.pkl")
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
@@ -94,15 +94,13 @@ def index():
     genre_names = list(genre_counts.index)
 
     # create visuals
-    # Top ten categories
-    top_category_count = df.iloc[:,4:].sum().sort_values(ascending=False)[1:11]
-    top_category_names = list(top_category_count.index)
+    catg_nam = df.iloc[:, 4:].columns
+    bol = df.iloc[:, 4:] != 0
+    cat_bol = bol.sum().values
 
-    # Top 20 word counts
-    word_counts_path = "C:/Users/Osama/Desktop/OneDrive/Online Education/Data_Scientist_Nanodegree/Project - 5 Disaster_Response/data/word_counts.npz"
-    word_counts = compute_word_counts(df['message'].tolist(), False, word_counts_path)
-    top_20_words = word_counts[0]
-    top_20_counts = word_counts[1]
+    sum_cat = df.iloc[:, 4:].sum()
+    top_cat = sum_cat.sort_values(ascending=False)[1:11]
+    top_cat_names = list(top_cat.index)
 
     graphs = [
         {
@@ -127,13 +125,13 @@ def index():
         {
             'data': [
                 Bar(
-                    x=top_category_names,
-                    y=top_category_count
+                    x=catg_nam,
+                    y=cat_bol
                 )
             ],
 
             'layout': {
-                'title': 'Top Ten Categories',
+                'title': 'Message Categories distributions',
                 'yaxis': {
                     'title': "Count"
                 },
@@ -145,18 +143,18 @@ def index():
         {
             'data': [
                 Bar(
-                    x=top_20_words,
-                    y=top_20_counts
+                    x=top_cat_names,
+                    y=top_cat
                 )
             ],
 
             'layout': {
-                'title': 'Top 20 Word Counts',
+                'title': 'Top 10 Categories',
                 'yaxis': {
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Words"
+                    'title': "Categories"
                 }
             }
         }
