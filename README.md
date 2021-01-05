@@ -25,7 +25,7 @@ Run the following commands in the project's root directory to set up database an
   python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/Disaster.db
 
 •	To run ML pipeline that trains classifier and saves -
-  python train_classifier.py data/Disaster.db models/classifier.pkl
+  python models/train_classifier.py data/Disaster.db models/classifier.pkl
 
 ## Running the Web App from the Project Workspace IDE
 
