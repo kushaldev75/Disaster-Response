@@ -42,37 +42,6 @@ def tokenize(text):
     clean = [lemmatizer.lemmatize(w, pos='v').strip() for w in clean]
     return clean
 
-def compute_word_counts(messages, load=True, filepath='../data/counts.npz'):
-    '''
-    input: (
-        messages: list or numpy array
-        load: Boolean value if load or run model
-        filepath: filepath to save or load data
-            )
-    Function computes the top 20 words in the dataset with counts of each term
-    output: (
-        top_words: list
-        top_counts: list
-            )
-    '''
-    if load:
-        # load arrays
-        data = np.load(filepath)
-        return list(data['top_words']), list(data['top_counts'])
-    else:
-        # get top words
-        counter = Counter()
-        for message in messages:
-            tokens = tokenize(message)
-            for token in tokens:
-                counter[token] += 1
-        # top 20 words
-        top = counter.most_common(20)
-        top_words = [word[0] for word in top]
-        top_counts = [count[1] for count in top]
-        # save arrays
-        np.savez(filepath, top_words=top_words, top_counts=top_counts)
-        return list(top_words), list(top_counts)
 
 # load data
 engine = create_engine('sqlite:///../data/Disaster.db')
