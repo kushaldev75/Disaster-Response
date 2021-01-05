@@ -55,9 +55,9 @@ def clean_data(df):
     # Concatenate the original dataframe with the new categories dataframe
     df = pd.concat([df, categories], axis=1)
     df.drop_duplicates(subset='id', inplace=True)
+    df = df[(df['related'] == 0) | (df['related'] == 1)]
 
     return df
-
 
 
 def save_data(df, database_filename):
